@@ -9,13 +9,13 @@ export const logger = createLogger({
   ),
   transports: [
     // This can be enabled for debugging purpose
-     new transports.Console({level: "debug"}),
-     new transports.File({ 
-         filename: 'debug.log',
-         maxsize: 10*1024,
-         maxFiles:1,
-         level: "info",
-      }),
+    //  new transports.Console({level: "debug"}),
+    //  new transports.File({ 
+    //      filename: 'debug.log',
+    //      maxsize: 10*1024,
+    //      maxFiles:1,
+    //      level: "info",
+    //   }),
      new transports.Console({level: "error"}),
      new transports.File({ 
          filename: 'error.log',
