@@ -2,20 +2,31 @@ pipeline {
   agent any
 
   tools {
-    nodejs "NodeJS 22.2.0"
+    nodejs "NodeJS 22.0.0"
   }
 
   stages {
-    stage('Install dependencies') {
+    stage('Clone Repository') {
       steps {
-        bat 'npm install'
+        git(
+          url: 'https://github.com/aasiamoqeem/JupiterToys.git',
+          branch: 'main'
+        )
       }
     }
 
-    stage('Run Playwright Tests') {
+    stage('Install') {
       steps {
-        bat 'npx playwright install'
-        bat 'npx playwright test --project=chromium'
+        sh 'npm install'
+        sh 'node -v'
+        sh 'npm -v'
+      }
+    }
+
+    stage('Run Tests') {
+      steps {
+        sh 'npx playwright install'
+        sh 'npx playwright test --project=chromium'
       }
     }
   }
