@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+
+  tools {
+    nodejs "NodeJS 22.2.0"
+  }
+
+  stages {
+    stage('Install dependencies') {
+      steps {
+        bat 'npm install'
+      }
+    }
+
+    stage('Run Playwright Tests') {
+      steps {
+        bat 'npx playwright install'
+        bat 'npx playwright test --project=chromium'
+      }
+    }
+  }
+
+  post {
+    always {
+      allure includeProperties: false, results: [[path: 'allure-results']]
+    }
+  }
+}
